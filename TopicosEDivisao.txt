@@ -1,0 +1,36 @@
+Simulador do sensor (adicionar se necessario):
+- Velocidade horizontal
+- Velocidade vertical
+- Altitude (simular geografia do terreno)
+- Latitude
+- Longitude
+- Horizonte artificial (grau de inclinação do avião)
+- Combustível disponível
+
+Constantes (adicionar se necessario):
+- Massa da aeronave
+- Medidas da aeronave (area das asas, formato, etc.)
+- Capacidade maxima de combustivel
+
+Sugestoes de funcoes[parametros sugeridos]:
+
+GRUPO 1
+- Velocidade horizontal [latitude, longitude]
+- Velocidade vertical [altitude] // Armazenar a ultima dada para comparar
+- Orientacao da aeronave [latitude, longitude] // Retornar um objeto que indica grau (0-360) e direcao (N, S, L, O, NW, NE, SW, SE)
+
+GRUPO 2
+- Aceleracao
+- Força Peso [altitude]
+- Sustentacao (Lift)
+- Pressão atmosferica
+
+GRUPO 3
+- Arrasto (Drag)
+- Empuxo (Thrust)
+- Risco de colisao com o solo // usar velocidade vertical e altitude
+
+GRUPO 4
+- Tempo de voo disponivel // checar consumo e calcular quanto ainda pode voar
+- Consumo medio de combustível 
+- Alcance (Range)
