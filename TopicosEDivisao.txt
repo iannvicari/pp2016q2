@@ -6,11 +6,18 @@ Simulador do sensor (adicionar se necessario):
 - Horizonte artificial (grau de inclinação do avião)
 - Combustível disponível
 
-Constantes (depende do modelo da aeronave):
+Constantes (depende do modelo da aeronave): Boeing 777
 - Massa da aeronave
-- Medidas da aeronave (area das asas, formato, etc.)
+- Area da asa
+- Coeficiente de arrasto (Drag Coefficient)
+- Empuxo maximo no nivel do mar
 - Capacidade maxima de combustivel
 - Consumo médio de combustivel
+
+Constantes fisicas:
+- Densidade do ar no nivel do mar
+- Constante de gases especifica para o ar
+- Temperatura fixa (15 C = 288.15 K)
 
 Sugestoes de funcoes[parametros sugeridos]:
 
@@ -26,9 +33,11 @@ GRUPO 2 - Rafael
 - Pressão atmosferica
 
 GRUPO 3 - Victor
-- Arrasto (Drag)
-- Empuxo (Thrust)
+- Arrasto (Drag) [altitude velocidade]
+- Empuxo (Thrust) [altitude]
+- Densidade do ar [altitude]
 - Risco de colisao com o solo // usar velocidade vertical e altitude
+- Velocidade Real [velocidade_vertical, velocidade_horizontal]
 
 GRUPO 4 - Iann
 - Tempo de voo disponivel // checar consumo e calcular quanto ainda pode voar
