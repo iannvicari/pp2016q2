@@ -7,7 +7,7 @@
 ;fórmula obtida em: http://128.173.204.63/courses/cee5614/cee5614_pub/Aircraft_perf_notes2.pdf
 (define lift-coefficient
   (lambda ()
-    (/ (* (* weight 9.8) 2) (* (* air-density wing-area) (* true-velocity true-velocity))))) 
+    (/ (* (* mass 9.8) 2) (* (* air-density wing-area) (* true-velocity true-velocity))))) 
 
 ;sustentação e coeficiente de sustentação 
 ;(fórmula obtida em: https://www.grc.nasa.gov/www/k-12/airplane/lifteq.html)
