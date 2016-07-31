@@ -20,6 +20,7 @@
 (define wing-area 427.8) ; m^2 => Area das asas
 (define Tmax-SL 830000) ; N => Empuxo Maximo possivel
 (define weight 351533) ; peso máximo da aeronave em kg
+(define max-altitude 13.14); Km
 
 ;Boeing 777-300ER:
 (define fuel-load (/ 171160 qav)) ;Capacidade em kg
