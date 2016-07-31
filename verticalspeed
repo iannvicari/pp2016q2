@@ -1,0 +1,13 @@
+	(load "constants.scm")
+	;função irá rodar a cada 1 segundo
+	;retorna velocidade vertical em Km/h
+	;old_altitude, altitude da ultima medida
+	;altitude, altitude atual
+	;max-altitude, altitude maxima segura 13,14 Km
+	;min-altitude, altitude mínima segura
+	
+		(define vertical-speed
+			(lambda (altitude)
+			(if (and (< altitude  max-altitude) (> altitude min-altitude ))
+			(* (module (- old_altitude altitude))3600)
+			)))
