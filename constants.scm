@@ -5,10 +5,18 @@
 (define Temperature 288.15) ; Kelvin => Temperatura constante
 (define qav 0.813) ; QAV => densidade da querosene de aviação
 
+
+;;; Constantes geográficas
+(define max-latitude 90.0);
+(define min-latitude -90.0);
+(define max-longitude 180.0);
+(define min-longitude -180.0);
+
+
 ;;; Constantes da Aeronave
 ; Modelo da aeronave: Boeing 777
 
-(define drag-coeff 0.026) ; Coeficiente de arrast0
+(define drag-coeff 0.026) ; Coeficiente de arrasto
 (define wing-area 427.8) ; m^2 => Area das asas
 (define Tmax-SL 830000) ; N => Empuxo Maximo possivel
 (define weight 351533) ; peso máximo da aeronave em kg
