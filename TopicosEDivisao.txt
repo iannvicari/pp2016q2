@@ -31,6 +31,7 @@ GRUPO 2 - Rafael
 - Força Peso [altitude]
 - Sustentacao (Lift)
 - Pressão atmosferica
+- Gravidade // Força gravitacional, considerando-se a latitude e a altura da aeronave
 
 GRUPO 3 - Victor
 - Arrasto (Drag) [altitude velocidade]
