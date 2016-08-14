@@ -1,7 +1,8 @@
+(load "constants.scm")
+
 (module fuel (range trest)
 	
 	(import chicken scheme)
-	(load "constants.scm")
 	(import constants)
 
 	;funcao recebe a velocidade do aviao e retorna 

@@ -1,10 +1,11 @@
-(module coordinations (guidance make-movement-monitor)
+(load "constants.scm")
+
+(module coordinations (position make-movement-monitor)
 
 	(import chicken scheme)
-	(load "constants.scm")
 	(import constants)
 
-	; Funcoes deverao ser executadas a cada um segundo para atualizar valores
+	; Funcoes deverao ser executadas periodicamente para atualizar valores
 	
 	; Retorna o posicionamento no Globo da aeronave
 	;latitude: latitude atual
@@ -14,7 +15,7 @@
 	;MIN-LATITUDE, latitude minima(-90.000)        
 	;MAX-LONGITUDE, longitude maxima(180.000)		
 	;MIN-LONGITUDE, longitude minima(-180.000)
-	(define (guidance latitude longitude)
+	(define (position latitude longitude)
 		(if (and (< latitude MAX-LATITUDE) (> latitude MIN-LATITUDE))
 			(if (and (< longitude MAX-LONGITUDE) (> longitude MIN-LONGITUDE))
 				(if (and (> longitude 0) (> latitude 0))
@@ -35,7 +36,7 @@
 												(cons ('S 180.0)))))))))))))
 
 	; Criar monitor de movimento para extrair informacoes
-	; como velocidade horizontal, vertical e real velocidade
+	; como velocidade horizontal, vertical e a real velocidade frontal
 
 	; EX: (define monitor (make-movement-monitor))
 	;	  (monitor vertical-speed) -> retorna velocidade vertical (na segunda execucao, primeira seta o old_value)
@@ -74,12 +75,11 @@
 		;old_altitude: altitude da ultima medida
 		;altitude: altitude atual
 		;MAX-ALTITUDE, altitude maxima segura 13.14 Km
-		;MIN-ALTITUDE, altitude mínima segura
 		(define (vertical-speed altitude)
 			(if (equal? old_altitude 'NOTSET)
 				(set! old_altitude altitude)
 			; else
-				(if (and (< altitude MAX-ALTITUDE) (> altitude MIN-ALTITUDE))
+				(if (and (< altitude MAX-ALTITUDE) (> altitude 0))
 					(begin
 						(set! old_altitude altitude) ; guarda altitude antiga
 						(* (modulo (- old_altitude altitude)) 3600)) ; retorna a nova
@@ -120,9 +120,7 @@
 		; TODO: chamar aqui os metodos que pegam os valores dos simuladores
 		; 		de altitude, longitude e altitude
 		(lambda (m)
-			(cond ((eq? m 'direction) (direction <VALOR_DO_SIMULADOR_LATITUDE> <VALOR_DO_SIMULADOR_LONGITUDE>))
-				  ((eq? m 'vertical-speed) (vertical-speed <VALOR_DO_SIMULADOR_ALTITUDE>))
-		      	  ((eq? m 'horizontal-speed) (horizontal-speed <VALOR_DO_SIMULADOR_LATITUDE> <VALOR_DO_SIMULADOR_LONGITUDE>))
-		      	  ((eq? m 'true-velocity) (true-velocity 
-			      							(vertical-speed <VALOR_DO_SIMULADOR_ALTITUDE>) 
-			      							(horizontal-speed <VALOR_DO_SIMULADOR_LATITUDE> <VALOR_DO_SIMULADOR_LONGITUDE>))))))	)
+			(cond ((eq? m 'direction) direction)
+				  ((eq? m 'vertical-speed) vertical-speed)
+		      	  ((eq? m 'horizontal-speed) horizontal-speed)
+		      	  ((eq? m 'true-velocity) true-velocity))))		)

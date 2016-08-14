@@ -1,7 +1,8 @@
+(load "constants.scm")
+
 (module physics (air-density atmospheric-pressure gravity)
 
 	(import chicken scheme)
-	(load "constants.scm")
 	(import constants)
 
 	;Forca gravitacional, considerando-se altitude e latitude

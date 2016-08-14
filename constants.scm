@@ -1,4 +1,4 @@
-(module constants
+(module constants (P-SL R-AIR TEMPERATURE QAV MAX-LATITUDE MIN-LATITUDE MAX-LONGITUDE MIN-LONGITUDE DRAG-COEFF WING-AREA TMAX-SL MASS MAX-ALTITUDE FUEL-LOAD MF)
 
 	(import chicken scheme)
 
@@ -9,11 +9,11 @@
 	(define QAV 0.813) ; QAV => densidade da querosene de aviação
 
 
-	;;; Constantes geográficas (em graus)
-	(define MAX-LATITUDE 90.0);
-	(define MIN-LATITUDE -90.0);
-	(define MAX-LONGITUDE 180.0);
-	(define MIN-LONGITUDE -180.0);
+	;;; Constantes geograficas (em graus)
+	(define MAX-LATITUDE 90.0)
+	(define MIN-LATITUDE -90.0)
+	(define MAX-LONGITUDE 180.0)
+	(define MIN-LONGITUDE -180.0)
 
 
 	;;; Constantes da Aeronave
@@ -21,8 +21,8 @@
 	(define DRAG-COEFF 0.026) ; sem unidade => Coeficiente de arrasto
 	(define WING-AREA 427.8) ; m^2 => Area das asas
 	(define TMAX-SL 830000) ; N => Empuxo Maximo possivel
-	(define MASS 351533) ; Kg => Massa máxima da aeronave
+	(define MASS 351533) ; Kg => Massa maxima da aeronave
 	(define MAX-ALTITUDE 13.14); Km => Altitude maxima suportada
 	(define FUEL-LOAD (/ 171160 QAV)) ; Kg => Capacidade maxima de combustivel
-	(define MF (/ 9100 QAV)) ; Kg/hora => Consumo de combustivel por hora
+	(define MF (/ 9100 QAV)) ; Kg/hora => Consumo medio de combustivel por hora
 )

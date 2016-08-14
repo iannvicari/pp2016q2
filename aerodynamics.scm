@@ -1,9 +1,10 @@
-(module aerodynamics (collisionrisk acceleration drag lift thrust)
+(load "constants.scm")
+(load "physics.scm")
+
+(module aerodynamics (collision-risk acceleration drag lift thrust)
 
 	(import chicken scheme)
-	(load "constants.scm")
 	(import constants)
-	(load "physics.scm")
 	(import physics)
 
 	; Altitude - Altitude Absoluta (simulado)
