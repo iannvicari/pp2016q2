@@ -1,4 +1,4 @@
-(module constants (P-SL R-AIR TEMPERATURE QAV MAX-LATITUDE MIN-LATITUDE MAX-LONGITUDE MIN-LONGITUDE DRAG-COEFF WING-AREA TMAX-SL MASS MAX-ALTITUDE FUEL-LOAD MF)
+(module constants (P-SL R-AIR TEMPERATURE QAV MAX-LATITUDE MIN-LATITUDE MAX-LONGITUDE MIN-LONGITUDE DRAG-COEFF WING-AREA TMAX-SL MASS MAX-ALTITUDE MIN-ALTITUDE FUEL-LOAD MF)
 
 	(import chicken scheme)
 
@@ -23,6 +23,7 @@
 	(define TMAX-SL 830000) ; N => Empuxo Maximo possivel
 	(define MASS 351533) ; Kg => Massa maxima da aeronave
 	(define MAX-ALTITUDE 13.14); Km => Altitude maxima suportada
+	(define MIN-ALTITUDE 1) ; Km => Altitude minima segura durante voo
 	(define FUEL-LOAD (/ 171160 QAV)) ; Kg => Capacidade maxima de combustivel
 	(define MF (/ 9100 QAV)) ; Kg/hora => Consumo medio de combustivel por hora
 )

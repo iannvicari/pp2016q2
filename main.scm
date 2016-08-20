@@ -56,7 +56,7 @@
 		(print (format "Collision Risk: ~@T~A ~@TDrag: ~@T~A" "-" "-")) ; TODO
 		(print "\n*** Navigation ***")
 		(print (format "Latitude: ~@T~A ~@TLongitude: ~@T~A" "-" "-")) ; TODO
-		(print (format "Altitude: ~@T~A ~@TArtificial Horizon: ~@T~A" "-" "-")) ; TODO
+		(print (format "Altitude: ~@T~A ~@TArtificial Horizon: ~@T~A" panel_altitude panel_horizon))
 		(print (format "Position: ~@T~A ~@TDirection: ~@T~A" "-" "-")) ; TODO
 		(print "\n\nPress Ctrl+C to exit"))
 
@@ -64,12 +64,13 @@
 			(cond ((eq? m 'update) update)
 				  ((eq? m 'update-fuel-var) update-fuel-var)
 				  ((eq? m 'update-gps-var) update-gps-var)
-				  ((eq? m 'update-fuel-var) update-altitude-var))))
+				  ((eq? m 'update-altitude-var) update-altitude-var))))
 
 (define panel (make-interface))
 
 ; Criar sensores
 (define fuel-sensor (make-fuel-sensor))
+(define altitude-sensor (make-altitude-sensor))
 
 ; Lista de simuladores de sensor (funcionam independentes da interface)
 (define simulators-threads
@@ -77,14 +78,29 @@
 		; Latitude e longitude
 		; TODO
 		
-		; Altitude e horizonte artificial
-		; TODO
-		
+		; Altitude
+		(make-thread
+			(lambda () ; thunk
+				(let loop() ; loop infinito para update de sensor
+					((altitude-sensor 'update-altitude))
+					((panel 'update-altitude-var) altitude-sensor)
+					(thread-sleep! 1) ; "atualiza" sensor de n em n segundos
+					(loop))) 'altitude-simulator)
+
+		; Horizonte artificial
+		(make-thread
+			(lambda () ; thunk
+				(let loop() ; loop infinito para update de sensor
+					((altitude-sensor 'update-horizon))
+					((panel 'update-altitude-var) altitude-sensor)
+					(thread-sleep! 3) ; "atualiza" sensor de n em n segundos
+					(loop))) 'horizon-simulator)
+
 		; Fuel
 		(make-thread
 			(lambda () ; thunk
 				(let loop() ; loop infinito para update de sensor
-					(define intervalo 2) ; define o intervalo n de atualizacao
+					(define intervalo 3) ; define o intervalo n de atualizacao
 					((fuel-sensor 'update) intervalo)
 					((panel 'update-fuel-var) fuel-sensor)
 					(thread-sleep! intervalo) ; "atualiza" sensor de n em n segundos
@@ -99,7 +115,6 @@
 					((panel 'update))
 			   		(thread-sleep! 1)
 			   		(loop))) 'panel-interface)))
-
 
 ; Executar simuladores e interface
 (map thread-join! (map thread-start! (append simulators-threads panel-thread)))

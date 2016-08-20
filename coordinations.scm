@@ -46,10 +46,6 @@
 		(define old_altitude 'NOTSET)
 		(define old_latitude 'NOTSET)
 		(define old_longitude 'NOTSET)
-
-		; Funcao auxiliar para calcular modulo de valor
-		(define modulo (lambda (valor) (if (< valor 0) (* valor -1) valor)))
-
 		; Retorna Direcao em que aeronave se moveu
 		; (N, S, E, W, NW, NE, SW, SE)
 		(define (direction latitude longitude)
@@ -70,7 +66,6 @@
 					((and (> latitude old_latitude) (< longitude old_longitude)) 'NW)
 					((and (> latitude old_latitude) (> longitude old_longitude)) 'NE)
 					(else 'STOPPED))))
-
 		;Velocidade vertical em Km/h
 		;old_altitude: altitude da ultima medida
 		;altitude: altitude atual
@@ -82,9 +77,8 @@
 				(if (and (< altitude MAX-ALTITUDE) (> altitude 0))
 					(begin
 						(set! old_altitude altitude) ; guarda altitude antiga
-						(* (modulo (- old_altitude altitude)) 3600)) ; retorna a nova
+						(* (abs (- old_altitude altitude)) 3600)) ; retorna a nova
 					'DANGER))) ; retorna DANGER se estiver com valor invalido?
-	
 		;old_latitude: latitide da ultima medida
 		;latitude: latitude atual
 		;old_longitude: ultima medida
@@ -111,14 +105,10 @@
 						(sqrt (+ (exp (* 111.12 (- old_latitude latitude)) 2) 
 						  	     (exp (* (- old_longitude longitude) (* 111.12 (cos latitude))) 2))))
 					'OUT_OF_MAP))) ; latitude ou longitude invalida
-
 		; Calcular o modulo do vetor de velocidade resultante dos
 		; vetores de velocidade horizontal e vertical
 		(define (true-velocity h_velocity v_velocity)
 				(sqrt (+ (expt h_velocity 2) (expt v_velocity 2))))
-
-		; TODO: chamar aqui os metodos que pegam os valores dos simuladores
-		; 		de altitude, longitude e altitude
 		(lambda (m)
 			(cond ((eq? m 'direction) direction)
 				  ((eq? m 'vertical-speed) vertical-speed)
