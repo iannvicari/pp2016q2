@@ -46,18 +46,18 @@
 	(define (update)
 		(run clear) ; limpar o console
 		(print "*** Atmosphere Condition ***")
-		(print (format "Pressure: ~@T~A ~@TAir Density: ~@T~A" "-" "-")) ; TODO
+		(print (format "Pressure: ~@T~1,3f ~@TAir Density: ~@T~1,3f" "-" "-")) ; TODO
 		(print "\n*** Fuel ***")
-		(print (format "Fuel: ~@T~A ~@TRange: ~@T~A" panel_fuel "-")) ; TODO
-		(print (format "Flight Time Left: ~@T~A hours" (trest panel_fuel)))
+		(print (format "Fuel: ~@T~1,3f ~@TRange: ~@T~1,3f" panel_fuel "-")) ; TODO
+		(print (format "Flight Time Left: ~@T~1,3f hours" (trest panel_fuel)))
 		(print "\n*** Flight Info ***")
-		(print (format "Velocity: ~@T~A ~@TLift: ~@T~A" "-" "-")) ; TODO
-		(print (format "Accelration: ~@T~A ~@TThrust: ~@T~A" "-" "-")) ; TODO
-		(print (format "Collision Risk: ~@T~A ~@TDrag: ~@T~A" "-" "-")) ; TODO
+		(print (format "Velocity: ~@T~1,3f ~@TLift: ~@T~1,3f" "-" "-")) ; TODO
+		(print (format "Accelration: ~@T~1,3f ~@TThrust: ~@T~1,3f" "-" "-")) ; TODO
+		(print (format "Collision Risk: ~@T~1,3f ~@TDrag: ~@T~1,3f" "-" "-")) ; TODO
 		(print "\n*** Navigation ***")
-		(print (format "Latitude: ~@T~A ~@TLongitude: ~@T~A" "-" "-")) ; TODO
-		(print (format "Altitude: ~@T~A ~@TArtificial Horizon: ~@T~A" panel_altitude panel_horizon))
-		(print (format "Position: ~@T~A ~@TDirection: ~@T~A" "-" "-")) ; TODO
+		(print (format "Latitude: ~@T~1,3f ~@TLongitude: ~@T~1,3f" "-" "-")) ; TODO
+		(print (format "Altitude: ~@T~1,3f ~@TArtificial Horizon: ~@T~1,5f" panel_altitude panel_horizon))
+		(print (format "Position: ~@T~1,3f ~@TDirection: ~@T~1,3f" "-" "-")) ; TODO
 		(print "\n\nPress Ctrl+C to exit"))
 
 	(lambda (m)
