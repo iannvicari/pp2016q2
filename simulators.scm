@@ -42,9 +42,9 @@
 				((<= (abs (- altitude old-altitude)) 0.01) ; variacao quase nula
 					(set! horizon 0))
 				((< (- altitude old-altitude) 0) ; descendo
-					(set! horizon (* -1 (+ (random 30) (* 0.1 (- altitude old-altitude))))))
+					(set! horizon (* -1 (+ (random 30) (* 0.1 (abs (- altitude old-altitude)))))))
 				((> (- altitude old-altitude) 0) ; subindo
-					(set! horizon (+ (random 30) (* 0.1 (- altitude old-altitude))))))
+					(set! horizon (+ (random 30) (* 0.1 (abs (- altitude old-altitude)))))))
 			; Resetar caso gere algum valor fora do intervalo aceitavel
 			(if (or (>= horizon 90) (<= horizon -90)) (set! horizon 0))
 			; Atualizar valor de old-altitude
