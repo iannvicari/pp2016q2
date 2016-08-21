@@ -55,7 +55,7 @@
 		(print (format "Accelration: ~@T~1,3f ~@TThrust: ~@T~1,3f" "-" "-")) ; TODO
 		(print (format "Collision Risk: ~@T~1,3f ~@TDrag: ~@T~1,3f" "-" "-")) ; TODO
 		(print "\n*** Navigation ***")
-		(print (format "Latitude: ~@T~1,3f ~@TLongitude: ~@T~1,3f" "-" "-")) ; TODO
+		(print (format "Latitude: ~@T~1,3f ~@TLongitude: ~@T~1,3f" panel_latitude panel_longitude))
 		(print (format "Altitude: ~@T~1,3f ~@TArtificial Horizon: ~@T~1,5f" panel_altitude panel_horizon))
 		(print (format "Position: ~@T~1,3f ~@TDirection: ~@T~1,3f" "-" "-")) ; TODO
 		(print "\n\nPress Ctrl+C to exit"))
@@ -69,6 +69,7 @@
 (define panel (make-interface))
 
 ; Criar sensores
+(define gps-sensor (make-gps-sensor))
 (define fuel-sensor (make-fuel-sensor))
 (define altitude-sensor (make-altitude-sensor))
 
@@ -76,7 +77,26 @@
 (define simulators-threads
 	(list
 		; Latitude e longitude
-		; TODO
+		
+	 ; Latitude
+		(make-thread
+			(lambda () ; thunk
+				(let loop() ; loop infinito para update de sensor
+					((gps-sensor 'update-latitude))
+					((panel 'update-gps-var) gps-sensor)
+					(thread-sleep! 3) ; "atualiza" sensor de n em n segundos
+					(loop))) 'latitude-simulator)
+	 
+	 
+ 		; Longitude
+		(make-thread
+			(lambda () ; thunk
+				(let loop() ; loop infinito para update de sensor
+					((gps-sensor 'update-longitude))
+					((panel 'update-gps-var) gps-sensor)
+					(thread-sleep! 3) ; "atualiza" sensor de n em n segundos
+					(loop))) 'longitude-simulator)
+	 
 		
 		; Altitude
 		(make-thread
