@@ -12,7 +12,7 @@
 	; True-velocity (valor retirado de monitor de velocidade: coordinations.scm)
 	(define (collision-risk altitude grau truevelocity)
 			(if (>= grau 0)
-				-1
+				0
 				(/ altitude (* (sin grau) truevelocity))))
 
 	; Drag
@@ -40,4 +40,5 @@
 	; Aceleracao
 	; extraido de: https://www.grc.nasa.gov/www/k-12/airplane/motion.html 
 	(define (acceleration altitude latitude truevelocity)
-	    (/ (- (thrust altitude latitude) (drag truevelocity altitude latitude)) MASS))	)
+	    (* 100000 (/ (- (thrust altitude latitude) (drag truevelocity altitude latitude)) MASS)))
+)

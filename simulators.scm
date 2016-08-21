@@ -14,14 +14,11 @@
 	  	(define longitude -46.6566) ; valores iniciais (aeroporto de Congonhas)
 		;(define old-longitude longitude)
 		(define final-latitude 40.6412); valores finais (John F. Kennedy International Airport NY, USA)
-	  	(define final-longitude -73.7781); valores finais (John F. Kennedy International Airport NY, USA)
-	  
-		
+	  	(define final-longitude -73.7781); valores finais (John F. Kennedy International Airport NY, USA)	
 		(define mx (make-mutex))
 		; Variacao de 0.00002 m por update
 		; Respeitar latitudes e longitudes maximas e minimas
 	    ; Seguir em direção as coordenadas destino 
-	  
 		(define (update-latitude)
 			(mutex-lock! mx)
 			(cond ((>= latitude MAX-LATITUDE) ; forcar diminuir
@@ -40,9 +37,8 @@
 				  			  	(if (< latitude  final-latitude)
 									(set! latitude (+ latitude 0.00001))
 									(set! latitude (- latitude 0.00001))))))))
-			(mutex-unlock! mx))
-	  
-	  		(define (update-longitude)
+			(mutex-unlock! mx))  
+	  	(define (update-longitude)
 			(mutex-lock! mx)
 			(cond ((>= longitude MAX-LONGITUDE) ; forcar diminuir
 					(set! longitude (- longitude (- 0.003 (* 0.0001 (random 10))))))
@@ -60,8 +56,7 @@
 				  			  	(if (< longitude  final-longitude)
 									(set! longitude (+ longitude 0.00001))
 									(set! longitude (- longitude 0.00001))))))))
-			(mutex-unlock! mx))
-	  
+			(mutex-unlock! mx))  
 		(define (get-latitude) latitude)
 		(define (get-longitude) longitude)
 		(lambda (m)
@@ -69,7 +64,6 @@
 				  ((eq? m 'update-longitude) update-longitude)
 				  ((eq? m 'get-latitude) get-latitude)
 				  ((eq? m 'get-longitude) get-longitude))))
-		
 
 	; Simulador de altitude e variacao de grau do horizonte artificial
 	(define (make-altitude-sensor)
