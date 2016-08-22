@@ -13,7 +13,7 @@
 	(define (collision-risk altitude grau truevelocity)
 			(if (>= grau 0)
 				0
-				(/ altitude (* (sin grau) truevelocity))))
+				(abs (/ altitude (* (sin grau) truevelocity)))))
 
 	; Drag
 	(define (drag truevelocity altitude latitude)
